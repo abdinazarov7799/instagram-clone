@@ -1,0 +1,18 @@
+.Menu{
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.Menu:hover{
+    background-color: #e4e6eb;
+}
+.Menu:hover.Menu img{
+    transition: 400ms;
+    transform: scale(1.1);
+}
+.Title{
+    padding-left: 16px;
+}
