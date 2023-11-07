@@ -7,7 +7,7 @@ import TrasUz from '../lang/uz.json'
 
 
 const resources = {
-    eng: {
+    en: {
         translation: TrasEng
     },
     ru: {
@@ -21,7 +21,7 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: "eng",
+        lng: "en",
         fallbackLng: "en",
 
         interpolation: {

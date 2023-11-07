@@ -11,6 +11,8 @@ import Logo from '/src/assets/icons/Logo-Instagram.png'
 import Menu from '/src/assets/icons/menu.png'
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
+import {Col} from "reactstrap";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.jsx";
 
 const SideBar = styled.div `
   position: relative;
@@ -33,7 +35,10 @@ const Sidebar = () => {
           <SidebarMenu title={t('notifications')} img={Heart}/>
           <SidebarMenu title={t('create')} img={Create}/>
           <SidebarMenu title={t('profile')} img={User}/>
-          <SidebarMenu title={t('more')} img={Menu}/>
+          <Col style={{position: "absolute", bottom: '18px'}}>
+              <LanguageSelector />
+              <SidebarMenu title={t('more')} img={Menu}/>
+          </Col>
       </SideBar>
   )
 }
