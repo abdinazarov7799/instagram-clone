@@ -15,7 +15,7 @@ import {Col} from "reactstrap";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.jsx";
 
 const SideBar = styled.div `
-  position: relative;
+  position: fixed;
   padding: 8px 12px;
   border-right: 1px solid rgba(128, 128, 128, 0.34);
   height: 100vh;

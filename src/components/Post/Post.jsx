@@ -2,6 +2,8 @@ import styled from "styled-components";
 import {Col, Row} from "reactstrap";
 import optionImg from '../../assets/icons/option.png';
 import {timeSince} from "../TimeSince/TimeSince.js";
+import {useState} from "react";
+import {Modal} from "antd";
 
 const PostCard = styled.div `
   width: 100%;
@@ -10,6 +12,13 @@ const PostCard = styled.div `
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+`
+const OptionButton = styled.button `
+    background: transparent;
+    border: none;
+    &:active{
+      opacity: 40%;
+    }
 `
 
 const Post = (props) => {
@@ -20,6 +29,7 @@ const Post = (props) => {
       background-position: center center;
       border-radius: 5px;
 `
+
   return(
       <>
           <PostCard>
@@ -37,15 +47,14 @@ const Post = (props) => {
                       <p style={{fontSize: '14px', color: "#838383"}}>{timeSince(props.date)}</p>
                   </Col>
                   <Col xs={1}>
-                      <span>
+                      <OptionButton onClick={() => setOpen(true)}>
                           <img src={optionImg} width={20} height={20}/>
-                      </span>
+                      </OptionButton>
                   </Col>
               </Row>
-              <PostImg>
-
-              </PostImg>
+              <PostImg />
           </PostCard>
+
       </>
   )
 }
