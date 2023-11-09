@@ -6,13 +6,22 @@ import RightSidebar from "./Layout/RightSidebar/RightSidebar.jsx";
 import {useSettingsStore} from "./Store/settingsStore.jsx";
 import {get} from "lodash";
 import {useNavigate} from "react-router";
+import {useEffect} from "react";
 
 function App() {
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
-    const setTheme = useSettingsStore(state => get(state, 'setTheme', () => {}));
     const isLogin = useSettingsStore(state => get(state, 'isLogin', () => {}));
     const navigate = useNavigate();
-    if (isLogin) navigate('/login');
+    useEffect(() => {
+        if (!isLogin) navigate('/login');
+        if (theme === 'dark'){
+            document.body.style.backgroundColor = '#000'
+            document.body.style.color = '#fff'
+        }else {
+            document.body.style.backgroundColor = '#fff'
+            document.body.style.color = '#000'
+        }
+    })
   return (
     <>
         {
@@ -21,7 +30,7 @@ function App() {
                     <Col  xl={2} className='d-sm-none d-md-block'>
                         <Sidebar />
                     </Col>
-                    <Col xs={12} sm={12} md={10} xl={6} className='mt-5 d-flex flex-column align-items-center'>
+                    <Col xs={12} sm={12} md={8} xl={6} className='mt-5 mx-auto d-flex flex-column align-items-center'>
                         <MainContent />
                     </Col>
                     <Col xl={3} className='d-sm-none d-xl-block mt-5'>

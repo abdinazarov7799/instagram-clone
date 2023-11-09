@@ -7,7 +7,7 @@ const Posts = () => {
 
   return(
       <>
-          <Col xs={12} sm={12} md={10} xl={8} className='mt-5'>
+          <Col xs={10} sm={10} md={10} xl={8} className='mt-5'>
               <Post
                   userImg={"https://telegra.ph/file/886ce5b383c23582e8749.jpg"}
                   userNickName={'abdinazarov7799'}

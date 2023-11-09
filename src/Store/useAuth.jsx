@@ -1,15 +1,12 @@
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
 let authStore = (set) => ({
-    users: [
-        {
-            phoneNumber: 998937397799,
-            fullName: 'Abdinazarov Diyorbek',
-            userName: 'abdinazarov',
-            password: '123href18'
-        }
-        ],
+    users: [],
     addUser: (newUser) => set((state) => ({ users: [...state.users, newUser] })),
+    logOut: () => {
+        set(() => ({ users: null }));
+        localStorage.removeItem("auth")
+    }
 })
 
 authStore = devtools(authStore)

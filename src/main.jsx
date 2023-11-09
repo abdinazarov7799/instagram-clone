@@ -6,7 +6,6 @@ import '../src/components/i18n.jsx'
 import { QueryClient , QueryClientProvider } from "react-query";
 import Register from "./Auth/Register.jsx";
 import Login from "./Auth/Login.jsx";
-import ErrorPage from "./Layout/404/ErrorPage.jsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 const queryClient = new QueryClient();
@@ -15,18 +14,18 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <ErrorPage />,
+        errorElement: <App />,
         children: [],
     },
     {
         path: "/login",
         element: <Login />,
-        errorElement: <ErrorPage />,
+        errorElement: <App />,
     },
     {
         path: "/sign-up",
         element: <Register />,
-        errorElement: <ErrorPage />,
+        errorElement: <App />,
     }
 ]);
 

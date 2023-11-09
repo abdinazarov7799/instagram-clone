@@ -2,12 +2,12 @@ import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {useAuthStore} from "../Store/useAuth.jsx";
 import {useSettingsStore} from "../Store/settingsStore.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {customMessage} from "../components/Message/Message.jsx";
 import Logo from "../assets/icons/Logo-Instagram.png";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
-import {get} from "lodash";
+import {get,isEqual} from "lodash";
 
 
 const LoginForm = styled.div`
@@ -63,28 +63,32 @@ const Login = () => {
     const navigate = useNavigate();
     const users = useAuthStore(state => get(state, 'users', () => {}));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
+    const logout = useAuthStore(state => get(state, 'logout', () => {}));
+    // logout();
     const [ formData, setFormData ] = useState(initialFormData);
     const [success, setSuccess] = useState(false);
+
+    useEffect(() =>{
+        setIsLogin(false)
+
+    },[])
     const onChange = (e) => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        setSuccess(false)
         users.map((user) => {
-            if (user.phoneNumber !== formData.phoneNumber && user.password !== formData.password){
+            if (isEqual(get(user,"phoneNumber"),get(formData,"phoneNumber")) && isEqual(get(user,"password"), get(formData,"password"))){
                 setSuccess(true)
-                setIsLogin(true)
-            }else {
-                setSuccess(false)
+                setIsLogin(true);
+                navigate("/");
             }
         })
         if (success){
-            navigate("/");
-            customMessage('success', "Success")
+            customMessage('success', "Login successful")
         }else {
-            customMessage('error', "Error")
+            customMessage('error', "Login error")
         }
     }
 

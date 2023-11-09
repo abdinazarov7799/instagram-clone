@@ -13,7 +13,7 @@ const RightSidebarDiv = styled.div `
 const RightSidebar = () => {
     const { t } = useTranslation();
   return(
-      <RightSidebarDiv>
+      <RightSidebarDiv className="d-none d-md-block">
         <RecommendedAccounts img={Img} nick={'diyorbek_abdinazarov'} description={'Diyorbek'} info={t('switch')}/>
         <div className='d-flex justify-content-between px-4 mt-2'>
             <p style={{fontSize: '14px', color: '#737373', fontWeight: 500}}>{t('suggestedForYou')}</p>

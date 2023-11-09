@@ -8,38 +8,53 @@ import Explore from '/src/assets/icons/explore.png'
 import User from '/src/assets/icons/user.png'
 import Reels from '/src/assets/icons/video.png'
 import Logo from '/src/assets/icons/Logo-Instagram.png'
-import Menu from '/src/assets/icons/menu.png'
+import InstagramIcon from '/src/assets/icons/instagram-icon.png'
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {Col} from "reactstrap";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.jsx";
+import {useSettingsStore} from "../../Store/settingsStore.jsx";
+import {get} from "lodash";
+import CreatePost from "../../components/CreatePost/CreatePost.jsx";
+import {useState} from "react";
+import HomeMenu from "../../components/HomeMenu/HomeMenu.jsx";
 
-const SideBar = styled.div `
+const SideBarDiv = styled.div `
   position: fixed;
   padding: 8px 12px;
   border-right: 1px solid rgba(128, 128, 128, 0.34);
   height: 100vh;
 `
-const Sidebar = () => {
+const SideBar = () => {
     const { t } = useTranslation();
+    const [newPostModal, setNewPostModal] = useState(false);
+    const toggle = () => setNewPostModal(!newPostModal);
   return (
-      <SideBar >
-          <div className='d-flex ps-2 mt-3 mb-3'>
-              <img src={Logo} alt="Instagram" width={105} height={60}/>
-          </div>
-          <SidebarMenu title={t('home')} img={Home}/>
-          <SidebarMenu title={t('search')} img={Search}/>
-          <SidebarMenu title={t('explore')} img={Explore}/>
-          <SidebarMenu title={t('reels')} img={Reels}/>
-          <SidebarMenu title={t('messages')} img={Chat}/>
-          <SidebarMenu title={t('notifications')} img={Heart}/>
-          <SidebarMenu title={t('create')} img={Create}/>
-          <SidebarMenu title={t('profile')} img={User}/>
-          <Col style={{position: "absolute", bottom: '18px'}}>
-              <LanguageSelector />
-              <SidebarMenu title={t('more')} img={Menu}/>
-          </Col>
-      </SideBar>
+      <>
+          <CreatePost isOpen={newPostModal} toggle={toggle}/>
+          <SideBarDiv className="d-none d-md-block">
+              <div>
+                  <div className='d-flex ps-2 mt-3 mb-3'>
+                      <img className="d-none d-xl-block" src={Logo} alt="Instagram" width={105} height={60}/>
+                  </div>
+                  <div className="d-block d-xl-none mb-4">
+                      <SidebarMenu img={InstagramIcon}/>
+                  </div>
+                  <SidebarMenu title={t('home')} img={Home}/>
+                  <SidebarMenu title={t('search')} img={Search}/>
+                  <SidebarMenu title={t('explore')} img={Explore}/>
+                  <SidebarMenu title={t('reels')} img={Reels}/>
+                  <SidebarMenu title={t('messages')} img={Chat}/>
+                  <SidebarMenu title={t('notifications')} img={Heart}/>
+                  <SidebarMenu toggle={toggle} title={t('create')} img={Create}/>
+                  <SidebarMenu title={t('profile')} img={User}/>
+              </div>
+              <Col className="d-flex flex-column mt-5 pt-3">
+                  <LanguageSelector />
+                  <HomeMenu />
+              </Col>
+          </SideBarDiv>
+      </>
   )
 }
-export default Sidebar
+export default SideBar

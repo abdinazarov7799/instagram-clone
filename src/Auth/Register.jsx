@@ -3,8 +3,11 @@ import Logo from '../assets/icons/Logo-Instagram.png'
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {useAuthStore} from "../Store/useAuth.jsx";
-import {useSettingsStore} from "../Store/settingsStore.jsx";
 import {customMessage} from "../components/Message/Message.jsx";
+import {get} from 'lodash'
+import {useNavigate} from "react-router";
+import {useSettingsStore} from "../Store/settingsStore.jsx";
+import {Link} from "react-router-dom";
 
 const RegisterForm = styled.div`
   width: 100%;
@@ -59,8 +62,11 @@ const initialFormData = {
 }
 const Register = () => {
     const {t} = useTranslation();
+    const navigate = useNavigate();
     const users = useAuthStore(state => get(state, 'users', []));
-    const addUser = useSettingsStore(state => get(state, 'addUser', () => {}));
+    const addUser = useAuthStore(state => get(state, 'addUser', () => {}));
+    const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
+    const isLogin = useSettingsStore(state => get(state, 'isLogin', () => {}));
     const [ formData, setFormData ] = useState(initialFormData);
     const [success, setSuccess] = useState(false);
     const onChange = (e) => {
@@ -70,20 +76,26 @@ const Register = () => {
     }
     const onSubmit = (e) => {
       e.preventDefault();
-      setSuccess(false)
-      users.map((user) => {
-          if (user.phoneNumber !== formData.phoneNumber){
-              setSuccess(true)
-          }else {
-              setSuccess(false)
-          }
-      })
-        if (success){
-            addUser(formData);
-            customMessage('success', "Success")
-        }else {
-            customMessage('error', "Error")
-        }
+      // setSuccess(false)
+      // users.map((user) => {
+      //     if (user.phoneNumber === formData.phoneNumber){
+      //         setSuccess(true)
+      //     }else {
+      //         setSuccess(false)
+      //     }
+      // })
+        setIsLogin(true);
+        console.log(isLogin)
+        addUser(formData);
+        customMessage('success', "Success")
+        navigate('/');
+        // if (success){
+        //     addUser(formData);
+        //     customMessage('success', "Success")
+        //     navigate('/');
+        // }else {
+        //     customMessage('error', "Error")
+        // }
     }
 
     return (
@@ -151,7 +163,7 @@ const Register = () => {
             </RegisterForm>
             <RegisterForm>
                 <div className="pt-4">
-                    <p>{t('haveAnAccount')} <a href="#" className="text-decoration-none">{t("login")}</a></p>
+                    <p>{t('haveAnAccount')} <Link className="text-decoration-none" to={"/login"}>{t("login")}</Link></p>
                 </div>
             </RegisterForm>
         </>

@@ -48,5 +48,9 @@
   "policy": "Policy",
   "cookiesPolicy": "Cookies Policy",
   "phoneNumber": "Phone number",
-  "forgetPassword": "Forger password?"
+  "forgetPassword": "Forger password?",
+  "newPostTitle": "Create new post",
+  "newPostText": "Drag photos and videos here",
+  "selectFromComputer": "Select from computer",
+  "logOut": "Log out"
 }

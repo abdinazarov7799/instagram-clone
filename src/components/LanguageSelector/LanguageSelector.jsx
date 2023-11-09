@@ -7,7 +7,9 @@ import i18n from "i18next";
 import {useState} from "react";
 import {useSettingsStore} from "../../Store/settingsStore.jsx";
 import {get} from "lodash";
-const Language = styled.button `
+import {Dropdown, Space} from "antd";
+const LanguageBtn = styled.button `
+    width: 100%;
     display: flex;
     align-items: center;
     margin: 2px 0;
@@ -30,22 +32,10 @@ const LanguageSelector = () => {
     const [showLang, setShowLang] = useState(false);
     const lang = useSettingsStore(state => get(state, 'lang', () => {}));
     const setLang = useSettingsStore(state => get(state, 'setLang', () => {}));
-    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
-    console.log(lang,"lang")
-    console.log(theme,"theme")
+    // const [currentImg, setCurrentImg] = useState()
     const { t } = useTranslation();
-    const LangList = styled.ul `
-      display: ${showLang ? 'block' : 'none'};
-      list-style: none;
-      padding: 0;
-      position: absolute;
-      top: -105px;
-      background: #e4e6eb;
-      border-radius: 10px;
-      transition: 400ms;
-`
-    const changeLanguage = (lng) => {
 
+    const changeLanguage = (lng) => {
         return () => {
             setShowLang(!showLang);
             setLang(lng);
@@ -53,35 +43,51 @@ const LanguageSelector = () => {
         }
     }
 
-    const langClickHandler = () =>{
-        setShowLang(!showLang);
-    }
+    const items = [
+        {
+            key: '1',
+            label: (
+                <span onClick={changeLanguage('uz')}>
+                    <img src={uz} width={20} height={20} className='me-2'/>
+                    <span>O'zbek</span>
+                </span>
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <span onClick={changeLanguage('eng')}>
+                    <img src={eng} width={20} height={20} className='me-2'/>
+                    <span>English</span>
+                </span>
+            ),
+        },
+        {
+            key: '3',
+            label: (
+                <span onClick={changeLanguage('ru')}>
+                    <img src={ru} width={20} height={20} className='me-2'/>
+                    <span>Русский</span>
+                </span>
+            ),
+        },
+    ];
+
   return(
       <>
-                  <LangList>
-                      <li>
-                          <Language onClick={changeLanguage('en')}>
-                              <img src={eng} width={20} height={20} className='me-2'/>
-                              <span>English</span>
-                          </Language>
-                      </li>
-                      <li>
-                          <Language onClick={changeLanguage('ru')}>
-                              <img src={ru} width={20} height={20} className='me-2'/>
-                              <span>Русский</span>
-                          </Language>
-                      </li>
-                      <li>
-                          <Language onClick={changeLanguage('uz')}>
-                              <img src={uz} width={20} height={20} className='me-2'/>
-                              <span>O'zbek</span>
-                          </Language>
-                      </li>
-                  </LangList>
-          <Language onClick={langClickHandler}>
-              <img src={eng} width={20} height={20} className='me-2'/>
-              {t('current_language')}
-          </Language>
+          <Space>
+              <Dropdown
+                  menu={{
+                      items,
+                  }}
+                  placement="topLeft"
+              >
+                  <LanguageBtn >
+                      <img src={uz} width={20} height={20} className='me-2'/>
+                      <span className="d-none d-xl-block">{t('current_language')}</span>
+                  </LanguageBtn>
+              </Dropdown>
+          </Space>
       </>
   )
 }
