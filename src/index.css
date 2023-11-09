@@ -3,6 +3,16 @@
   padding: 0;
 }
 body {
+  margin: 0 auto;
+  max-width: 1500px;
   min-height: 100vh;
   font-weight: 400;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }

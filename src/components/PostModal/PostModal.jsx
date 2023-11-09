@@ -1,10 +1,10 @@
 import useModal from "../../Store/useModal.jsx";
 import styled from "styled-components";
 
-const PostModal = () => {
-  const {isOpen} = useModal();
+const PostModal = (props) => {
+  const {isOpen,onClose} = useModal();
   const ModalDiv = styled.div`
-      display: "${isOpen ? 'none' : 'block'}";
+      opacity: ${isOpen ? '100%' : '0'};
       position: fixed;
       width: 50%;
       max-width: 400px;
@@ -13,7 +13,7 @@ const PostModal = () => {
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 10px;
-      transition: 0.4s;
+      transition: 5s;
     `
 
   return(
@@ -30,7 +30,7 @@ const PostModal = () => {
             <button className='btn'>Add to Favorites</button>
           </li>
           <li className='py-1'>
-            <button className='btn'>Cancel</button>
+            <button className='btn' onClick={onClose}>Cancel</button>
           </li>
         </ul>
       </ModalDiv>

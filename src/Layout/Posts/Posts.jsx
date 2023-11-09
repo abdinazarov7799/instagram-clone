@@ -2,7 +2,6 @@ import Post from "../../components/Post/Post.jsx";
 import {useState} from "react";
 import {Col} from "reactstrap";
 
-
 const Posts = () => {
     const [posts, setPosts] = useState([])
 

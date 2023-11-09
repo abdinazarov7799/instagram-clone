@@ -5,7 +5,8 @@ import ru from "../../assets/icons/ru.png"
 import eng from "../../assets/icons/eng.png"
 import i18n from "i18next";
 import {useState} from "react";
-
+import {useSettingsStore} from "../../Store/settingsStore.jsx";
+import {get} from "lodash";
 const Language = styled.button `
     display: flex;
     align-items: center;
@@ -27,6 +28,11 @@ const Language = styled.button `
 
 const LanguageSelector = () => {
     const [showLang, setShowLang] = useState(false);
+    const lang = useSettingsStore(state => get(state, 'lang', () => {}));
+    const setLang = useSettingsStore(state => get(state, 'setLang', () => {}));
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
+    console.log(lang,"lang")
+    console.log(theme,"theme")
     const { t } = useTranslation();
     const LangList = styled.ul `
       display: ${showLang ? 'block' : 'none'};
@@ -42,10 +48,10 @@ const LanguageSelector = () => {
 
         return () => {
             setShowLang(!showLang);
+            setLang(lng);
             i18n.changeLanguage(lng);
         }
     }
-
 
     const langClickHandler = () =>{
         setShowLang(!showLang);
