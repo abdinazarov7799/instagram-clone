@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import Logo from '../assets/icons/Logo-Instagram.png'
+import Logo from '../../assets/icons/Logo-Instagram.png'
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import {useAuthStore} from "../Store/useAuth.jsx";
-import {customMessage} from "../components/Message/Message.jsx";
+import {useAuthStore} from "../../store/useAuth.jsx";
+import {customMessage} from "../../components/Message/Message.jsx";
 import {get} from 'lodash'
 import {useNavigate} from "react-router";
-import {useSettingsStore} from "../Store/settingsStore.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {Link} from "react-router-dom";
 
 const RegisterForm = styled.div`
@@ -147,13 +147,13 @@ const Register = () => {
                         />
                     </FormInput>
                     <Description>
-                        <p>{t("regDescription")} <a href="#">{t("learnMore")}</a></p>
+                        <p>{t("regDescription")} <a href="src/modules/auth/Register.jsx#">{t("learnMore")}</a></p>
                         <p>{t("regAgree")}
-                            <a href="#"> {t("terms")}, </a>
-                            <a href="#"> {t("privacy")} </a>
-                            <a href="#"> {t("policy")} </a>
+                            <a href="src/modules/auth/Register.jsx#"> {t("terms")}, </a>
+                            <a href="src/modules/auth/Register.jsx#"> {t("privacy")} </a>
+                            <a href="src/modules/auth/Register.jsx#"> {t("policy")} </a>
                             {t("and")}
-                            <a href="#"> {t("cookiesPolicy")} </a>
+                            <a href="src/modules/auth/Register.jsx#"> {t("cookiesPolicy")} </a>
                         </p>
                     </Description>
                     <button type={"submit"}>

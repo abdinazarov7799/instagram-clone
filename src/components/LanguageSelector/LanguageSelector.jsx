@@ -5,7 +5,7 @@ import ru from "../../assets/icons/ru.png"
 import eng from "../../assets/icons/eng.png"
 import i18n from "i18next";
 import {useState} from "react";
-import {useSettingsStore} from "../../Store/settingsStore.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
 import {Dropdown, Space} from "antd";
 const LanguageBtn = styled.button `

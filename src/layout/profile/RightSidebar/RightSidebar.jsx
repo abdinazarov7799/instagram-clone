@@ -1,6 +1,6 @@
-import RecommendedAccounts from "../../components/RecommendedAccounts/RecommendedAccounts.jsx";
-import Img from '../../data/photo_2023-08-01_11-36-40.jpg'
-import UserImg from '../../assets/icons/user.png'
+import RecommendedAccounts from "../../../components/RecommendedAccounts/RecommendedAccounts.jsx";
+import Img from '../../../assets/images/photo_2023-08-01_11-36-40.jpg'
+import UserImg from '../../../assets/icons/user.jpg'
 import {useTranslation} from "react-i18next";
 import styled from "styled-components";
 import Footer from "../Footer/Footer.jsx";
@@ -15,7 +15,7 @@ const RightSidebar = () => {
   return(
       <RightSidebarDiv className="d-none d-md-block">
         <RecommendedAccounts img={Img} nick={'diyorbek_abdinazarov'} description={'Diyorbek'} info={t('switch')}/>
-        <div className='d-flex justify-content-between px-4 mt-2'>
+        <div className='d-flex justify-content-between mt-2'>
             <p style={{fontSize: '14px', color: '#737373', fontWeight: 500}}>{t('suggestedForYou')}</p>
             <span style={{fontSize: '12px', fontWeight: 500}}>{t('seeAll')}</span>
         </div>

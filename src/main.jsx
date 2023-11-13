@@ -1,38 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import '../src/components/i18n.jsx'
 import { QueryClient , QueryClientProvider } from "react-query";
-import Register from "./Auth/Register.jsx";
-import Login from "./Auth/Login.jsx";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Router from "./router/Router.jsx";
 
 const queryClient = new QueryClient();
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        errorElement: <App />,
-        children: [],
-    },
-    {
-        path: "/login",
-        element: <Login />,
-        errorElement: <App />,
-    },
-    {
-        path: "/sign-up",
-        element: <Register />,
-        errorElement: <App />,
-    }
-]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <Router />
       </QueryClientProvider>
   </React.StrictMode>,
 )

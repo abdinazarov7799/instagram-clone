@@ -1,8 +1,8 @@
-import useModal from "../../Store/useModal.jsx";
+import useModal from "../../store/useModal.jsx";
 import styled from "styled-components";
 
 const PostModal = (props) => {
-  const {isOpen,onClose} = useModal();
+  const {isOpen,onClose,children} = props;
   const ModalDiv = styled.div`
       opacity: ${isOpen ? '100%' : '0'};
       position: fixed;
@@ -19,6 +19,7 @@ const PostModal = (props) => {
   return(
     <>
       <ModalDiv>
+        {children}
         <ul className='list-unstyled'>
           <li className='py-1 border-bottom'>
             <button className='btn text-danger fw-bold'>Delete</button>

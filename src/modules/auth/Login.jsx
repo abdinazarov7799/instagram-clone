@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import {useAuthStore} from "../Store/useAuth.jsx";
-import {useSettingsStore} from "../Store/settingsStore.jsx";
+import {useAuthStore} from "../../store/useAuth.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {useEffect, useState} from "react";
-import {customMessage} from "../components/Message/Message.jsx";
-import Logo from "../assets/icons/Logo-Instagram.png";
+import {customMessage} from "../../components/Message/Message.jsx";
+import Logo from "../../assets/icons/Logo-Instagram.png";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {get,isEqual} from "lodash";
@@ -95,10 +95,6 @@ const Login = () => {
   return(
       <>
           <LoginForm>
-              <div className='mt-2'>
-                  <img src={Logo} width={190} height={110}/>
-              </div>
-
               <form onSubmit={onSubmit}>
                   <FormInput>
                       <input type="number"
@@ -120,7 +116,7 @@ const Login = () => {
                       {t("login")}
                   </button>
                   <Description>
-                     <a href="#">{t("forgetPassword")}</a>
+                     <a href="src/modules/auth/Login.jsx#">{t("forgetPassword")}</a>
                   </Description>
               </form>
           </LoginForm>

@@ -1,7 +1,5 @@
 import {useTranslation} from "react-i18next";
 import styled from "styled-components";
-
-
 const Footer = () => {
     const { t } = useTranslation();
 
@@ -11,6 +9,7 @@ const Footer = () => {
         flex-wrap: wrap;
         justify-content: start;
         margin-top: 10px;
+        padding: 0 55px 0 0;
     `
     const Item = styled.li `
         margin: 0 3px

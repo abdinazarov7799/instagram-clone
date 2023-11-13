@@ -1,10 +1,10 @@
 import {Dropdown, Space, Switch} from "antd";
-import {useSettingsStore} from "../../Store/settingsStore.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
 import {useTranslation} from "react-i18next";
 import Menu from "../../assets/icons/menu.png";
 import SidebarMenu from "../SidebarMenu/SidebarMenu.jsx";
-import {useAuthStore} from "../../Store/useAuth.jsx";
+import {useAuthStore} from "../../store/useAuth.jsx";
 import {useNavigate} from "react-router";
 
 

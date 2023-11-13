@@ -52,5 +52,9 @@
   "newPostTitle": "Create new post",
   "newPostText": "Drag photos and videos here",
   "selectFromComputer": "Select from computer",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "likes": "likes",
+  "viewAll": "View all",
+  "comments": "comments",
+  "addAComment": "Add a comment..."
 }

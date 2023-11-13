@@ -6,7 +6,7 @@ const CustomModal = (props) => {
         <>
             <Modal isOpen={props.isOpen} toggle={props.toggle}>
                 <ModalHeader toggle={props.toggle}>{props.title}</ModalHeader>
-                <ModalBody >
+                <ModalBody className='p-0'>
                     {props.body}
                 </ModalBody>
             </Modal>
