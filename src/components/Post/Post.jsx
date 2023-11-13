@@ -92,7 +92,6 @@ const Post = (props) => {
                           <img src={optionImg} width={20} height={20}/>
                       </OptionButton>
                   </Col>
-
                   <CustomModal
                       isOpen={isOpen}
                       toggle={toggle}
