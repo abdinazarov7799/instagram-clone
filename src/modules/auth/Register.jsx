@@ -147,13 +147,13 @@ const Register = () => {
                         />
                     </FormInput>
                     <Description>
-                        <p>{t("regDescription")} <a href="src/modules/auth/Register.jsx#">{t("learnMore")}</a></p>
+                        <p>{t("regDescription")} <a href="#">{t("learnMore")}</a></p>
                         <p>{t("regAgree")}
-                            <a href="src/modules/auth/Register.jsx#"> {t("terms")}, </a>
-                            <a href="src/modules/auth/Register.jsx#"> {t("privacy")} </a>
-                            <a href="src/modules/auth/Register.jsx#"> {t("policy")} </a>
+                            <a href="#"> {t("terms")}, </a>
+                            <a href="#"> {t("privacy")} </a>
+                            <a href="#"> {t("policy")} </a>
                             {t("and")}
-                            <a href="src/modules/auth/Register.jsx#"> {t("cookiesPolicy")} </a>
+                            <a href="#"> {t("cookiesPolicy")} </a>
                         </p>
                     </Description>
                     <button type={"submit"}>
@@ -163,7 +163,7 @@ const Register = () => {
             </RegisterForm>
             <RegisterForm>
                 <div className="pt-4">
-                    <p>{t('haveAnAccount')} <Link className="text-decoration-none" to={"/login"}>{t("login")}</Link></p>
+                    <p>{t('haveAnAccount')} <Link className="text-decoration-none" to={"/auth/login"}>{t("login")}</Link></p>
                 </div>
             </RegisterForm>
         </>

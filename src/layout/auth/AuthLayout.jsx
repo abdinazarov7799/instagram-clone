@@ -7,7 +7,7 @@ function AuthLayout(props) {
             <div className='mt-2'>
                 <img src={Logo} width={190} height={110} alt={"instagram image"}/>
             </div>
-            {Outlet}
+            <Outlet />
         </div>
     );
 }

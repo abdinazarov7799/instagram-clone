@@ -10,14 +10,15 @@ import {useNavigate} from "react-router";
 
 const HomeMenu = () => {
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
-    // const logOut = useSettingsStore(state => get(state, 'logOut', () => {}));
     const setTheme = useSettingsStore(state => get(state, 'setTheme', () => {}));
-    const logOut = useAuthStore((state) => state.logOut);
+    const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
+    const logOut = useAuthStore(state => get(state, 'setIsLogin', () => {}));
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logOut();
-        navigate("/login")
+        setIsLogin(false);
+        navigate("/auth/login")
     };
     const { t } = useTranslation();
     const onChange = (checked) => {

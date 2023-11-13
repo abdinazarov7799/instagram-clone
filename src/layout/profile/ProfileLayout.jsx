@@ -11,7 +11,7 @@ function ProfileLayout() {
     const isLogin = useSettingsStore(state => get(state, 'isLogin', () => {}));
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLogin) navigate('/login');
+        if (!isLogin) navigate('/auth/login');
         if (theme === 'dark'){
             document.body.style.backgroundColor = '#000'
             document.body.style.color = '#fff'

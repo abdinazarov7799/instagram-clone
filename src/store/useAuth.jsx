@@ -1,7 +1,5 @@
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
-import {useSettingsStore} from "./settingsStore.jsx";
-import {get} from "lodash";
 
 let authStore = (set) => ({
     users: [],

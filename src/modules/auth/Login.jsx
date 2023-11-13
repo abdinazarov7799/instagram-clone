@@ -70,7 +70,6 @@ const Login = () => {
 
     useEffect(() =>{
         setIsLogin(false)
-
     },[])
     const onChange = (e) => {
         const { name, value } = e.target
@@ -116,13 +115,13 @@ const Login = () => {
                       {t("login")}
                   </button>
                   <Description>
-                     <a href="src/modules/auth/Login.jsx#">{t("forgetPassword")}</a>
+                     <a href="#">{t("forgetPassword")}</a>
                   </Description>
               </form>
           </LoginForm>
           <LoginForm>
               <div className="pt-4">
-                  <p>{t('dontHaveAnAccount')} <Link className="text-decoration-none" to="/sign-up">{t("signup")}</Link></p>
+                  <p>{t('dontHaveAnAccount')} <Link className="text-decoration-none" to="/auth/sign-up">{t("signup")}</Link></p>
               </div>
           </LoginForm>
       </>
