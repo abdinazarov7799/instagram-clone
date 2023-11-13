@@ -63,7 +63,7 @@ const Login = () => {
     const navigate = useNavigate();
     const users = useAuthStore(state => get(state, 'users', () => {}));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
-    const logout = useAuthStore(state => get(state, 'logout', () => {}));
+    // const logout = useAuthStore(state => get(state, 'logout', () => {}));
     // logout();
     const [ formData, setFormData ] = useState(initialFormData);
     const [success, setSuccess] = useState(false);
