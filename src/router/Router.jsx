@@ -26,17 +26,17 @@ function Router(props) {
         <BrowserRouter>
             <IsAuth>
                 <Routes>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route index element={<Posts />}/>
+                    <Route element={<MainLayout />}>
+                        <Route path="/" element={<Posts />}/>
                         <Route path={"*"} element={<Navigate to={"/"} replace />}/>
                     </Route>
                 </Routes>
             </IsAuth>
             <IsGuest>
                 <Routes>
-                    <Route path={"/auth"} element={<AuthLayout />}>
-                        <Route index element={<Login />}/>
-                        <Route path={"sign-up"} element={<Register />}/>
+                    <Route element={<AuthLayout />}>
+                        <Route path={"/auth"} element={<Login />}/>
+                        <Route path={"/sign-up"} element={<Register />}/>
                         <Route path={"*"} element={<Navigate to={"/auth"} replace />}/>
                     </Route>
                 </Routes>

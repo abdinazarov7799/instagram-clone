@@ -85,7 +85,6 @@ const Register = () => {
       //     }
       // })
         setIsLogin(true);
-        console.log(isLogin)
         addUser(formData);
         customMessage('success', "Success")
         navigate('/');
