@@ -33,4 +33,5 @@ const RightSidebar = () => {
       </RightSidebarDiv>
   )
 }
+
 export default RightSidebar
