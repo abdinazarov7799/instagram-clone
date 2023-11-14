@@ -45,5 +45,4 @@ function Router(props) {
         </BrowserRouter>
     );
 }
-
 export default Router;
