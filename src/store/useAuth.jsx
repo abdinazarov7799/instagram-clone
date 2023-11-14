@@ -3,10 +3,7 @@ import {devtools, persist} from "zustand/middleware";
 
 let authStore = (set) => ({
     users: [],
-    addUser: (newUser) => set((state) => ({ users: [...state.users, newUser] })),
-    logOut: () => {
-        set(() => ({ users: null }));
-    }
+    addUser: (newUser) => set((state) => ({ users: [...(state.users || []), newUser] })),
 })
 
 authStore = devtools(authStore)

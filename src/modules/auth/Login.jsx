@@ -8,11 +8,13 @@ import Logo from "../../assets/icons/Logo-Instagram.png";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {get, isEqual} from "lodash";
+import React from "react";
 
 
 const LoginForm = styled.div`
   width: 100%;
   margin: 15px auto 0 auto;
+  text-align: center;
   max-width: 360px;
   border: 2px solid #e4e6eb;
   padding: 0 35px 35px 35px;
@@ -64,41 +66,38 @@ const initialFormData = {
 const Login = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
-    const users = useAuthStore(state => get(state, 'users', () => {
-    }));
+    const users = useAuthStore(state => get(state, 'users', []));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {
     }));
-    // const logout = useAuthStore(state => get(state, 'logout', () => {}));
-    // logout();
     const [formData, setFormData] = useState(initialFormData);
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        setIsLogin(false)
-    }, [])
     const onChange = (e) => {
         const {name, value} = e.target
         setFormData({...formData, [name]: value})
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        users.map((user) => {
-            if (isEqual(get(user, "phoneNumber"), get(formData, "phoneNumber")) && isEqual(get(user, "password"), get(formData, "password"))) {
-                setSuccess(true)
-                setIsLogin(true);
-                navigate("/");
-            }
-        })
-        if (success) {
+        const foundUser = users.find((user) =>
+            isEqual(get(user, "phoneNumber"), get(formData, "phoneNumber")) &&
+            isEqual(get(user, "password"), get(formData, "password"))
+        );
+
+        if (foundUser) {
+            setSuccess(true);
+            setIsLogin(true);
+            navigate("/");
             customMessage('success', "Login successful")
         } else {
-            customMessage('error', "You have not an account, register please")
+            customMessage('error', "Login error")
         }
     }
-
     return (
         <>
             <LoginForm>
+                <div className='mt-2'>
+                    <img src={Logo} width={190} height={110} alt={"instagram image"}/>
+                </div>
                 <form onSubmit={onSubmit}>
                     <FormInput>
                         <input type="number"
@@ -126,8 +125,12 @@ const Login = () => {
             </LoginForm>
             <LoginForm>
                 <div className="pt-4">
-                    <p>{t('dontHaveAnAccount')} <Link className="text-decoration-none"
-                                                      to="/sign-up">{t("signup")}</Link></p>
+                    <p>{t('dontHaveAnAccount')}
+                        <Link className="text-decoration-none"
+                              to="/sign-up">
+                            {' ' + t("signup")}
+                        </Link>
+                    </p>
                 </div>
             </LoginForm>
         </>

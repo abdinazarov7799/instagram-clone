@@ -12,11 +12,9 @@ const HomeMenu = () => {
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const setTheme = useSettingsStore(state => get(state, 'setTheme', () => {}));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
-    const logOut = useAuthStore(state => get(state, 'setIsLogin', () => {}));
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        logOut();
         setIsLogin(false);
         navigate("/auth/login")
     };

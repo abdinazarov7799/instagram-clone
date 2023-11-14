@@ -4,7 +4,7 @@ import uz from "../../assets/icons/uz.png"
 import ru from "../../assets/icons/ru.png"
 import eng from "../../assets/icons/eng.png"
 import i18n from "i18next";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
 import {Dropdown, Space} from "antd";
@@ -32,8 +32,9 @@ const LanguageSelector = () => {
     const [showLang, setShowLang] = useState(false);
     const lang = useSettingsStore(state => get(state, 'lang', () => {}));
     const setLang = useSettingsStore(state => get(state, 'setLang', () => {}));
-    // const [currentImg, setCurrentImg] = useState()
     const { t } = useTranslation();
+    const currentLang = []
+    const items = []
 
     const changeLanguage = (lng) => {
         return () => {
@@ -41,37 +42,42 @@ const LanguageSelector = () => {
             setLang(lng);
             i18n.changeLanguage(lng);
         }
-    }
 
-    const items = [
+    }
+    const langs = [
         {
-            key: '1',
+            key: 'uz',
             label: (
-                <span onClick={changeLanguage('uz')}>
+                <span onClick={changeLanguage('uz')} className="d-flex align-items-center">
                     <img src={uz} width={20} height={20} className='me-2'/>
-                    <span>O'zbek</span>
+                    <span className="d-none d-xl-block">O'zbek</span>
                 </span>
             ),
         },
         {
-            key: '2',
+            key: 'eng',
             label: (
-                <span onClick={changeLanguage('eng')}>
+                <span onClick={changeLanguage('eng')} className="d-flex align-items-center">
                     <img src={eng} width={20} height={20} className='me-2'/>
-                    <span>English</span>
+                    <span className="d-none d-xl-block">English</span>
                 </span>
             ),
         },
         {
-            key: '3',
+            key: 'ru',
             label: (
-                <span onClick={changeLanguage('ru')}>
+                <span onClick={changeLanguage('ru')} className="d-flex align-items-center">
                     <img src={ru} width={20} height={20} className='me-2'/>
-                    <span>Русский</span>
+                    <span className="d-none d-xl-block">Русский</span>
                 </span>
             ),
         },
     ];
+    langs.map((value) => {
+        value.key === lang ?
+            currentLang.push(value.label) :
+            items.push(value)
+    })
 
   return(
       <>
@@ -83,8 +89,7 @@ const LanguageSelector = () => {
                   placement="topLeft"
               >
                   <LanguageBtn >
-                      <img src={uz} width={20} height={20} className='me-2'/>
-                      <span className="d-none d-xl-block">{t('current_language')}</span>
+                      {currentLang}
                   </LanguageBtn>
               </Dropdown>
           </Space>

@@ -56,5 +56,6 @@
   "likes": "likes",
   "viewAll": "View all",
   "comments": "comments",
-  "addAComment": "Add a comment..."
+  "addAComment": "Add a comment...",
+  "registered": "This number is already registered!"
 }

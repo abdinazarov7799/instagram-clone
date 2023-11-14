@@ -1,4 +1,3 @@
-import useModal from "../../store/useModal.jsx";
 import styled from "styled-components";
 
 const PostModal = (props) => {
