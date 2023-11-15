@@ -2,6 +2,13 @@ import styled, { keyframes } from 'styled-components';
 
 const SvgContainer = styled.div`
   width: 3.25em;
+  margin: 0 auto;
+`;
+
+const rotateAnimation = keyframes`
+  100% {
+    transform: rotate(360deg);
+  }
 `;
 
 const Svg = styled.svg`
@@ -9,22 +16,6 @@ const Svg = styled.svg`
   height: auto;
   transform-origin: center;
   animation: ${rotateAnimation} 2s linear infinite;
-`;
-
-const Circle = styled.circle`
-  fill: none;
-  stroke: hsl(214, 97%, 59%);
-  stroke-width: 2;
-  stroke-dasharray: 1, 200;
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-  animation: ${dashAnimation} 1.5s ease-in-out infinite;
-`;
-
-const rotateAnimation = keyframes`
-  100% {
-    transform: rotate(360deg);
-  }
 `;
 
 const dashAnimation = keyframes`
@@ -42,7 +33,15 @@ const dashAnimation = keyframes`
     stroke-dashoffset: -125px;
   }
 `;
-
+const Circle = styled.circle`
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: ${dashAnimation} 1.5s ease-in-out infinite;
+`;
 const Loading = () => {
     return (
         <SvgContainer>

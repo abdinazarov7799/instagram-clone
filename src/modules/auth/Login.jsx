@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {useAuthStore} from "../../store/useAuth.jsx";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {customMessage} from "../../components/Message/Message.jsx";
 import Logo from "../../assets/icons/Logo-Instagram.png";
 import {Link} from "react-router-dom";
@@ -67,10 +67,8 @@ const Login = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const users = useAuthStore(state => get(state, 'users', []));
-    const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {
-    }));
+    const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
     const [formData, setFormData] = useState(initialFormData);
-    const [success, setSuccess] = useState(false);
 
     const onChange = (e) => {
         const {name, value} = e.target
@@ -84,7 +82,6 @@ const Login = () => {
         );
 
         if (foundUser) {
-            setSuccess(true);
             setIsLogin(true);
             navigate("/");
             customMessage('success', "Login successful")
