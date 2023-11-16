@@ -1,4 +1,3 @@
-import SidebarMenu from "../../../components/SidebarMenu/SidebarMenu.jsx";
 import Home from '/src/assets/icons/home.png'
 import Search from '/src/assets/icons/search.png'
 import Chat from '/src/assets/icons/chat.png'
@@ -18,10 +17,12 @@ import CreatePost from "../../../components/CreatePost/CreatePost.jsx";
 import {useState} from "react";
 import HomeMenu from "../../../components/HomeMenu/HomeMenu.jsx";
 import Notifications from "../../../components/Notifications/index.jsx";
+import Menu from "../../../components/Menu/Menu.jsx";
+import useLikedPosts from "../../../store/useLikedPosts.jsx";
 
 const SideBarDiv = styled.div `
   position: fixed;
-  z-index: 5;
+  z-index: 120;
   padding: 8px 12px;
   border-right: 1px solid rgba(128, 128, 128, 0.34);
   height: 100vh;
@@ -33,26 +34,27 @@ const SideBar = () => {
     const newPostModalToggle = () => setNewPostModal(!newPostModal);
     const [notifications, setNotifications] = useState(false);
     const notificationsToggle = () => setNotifications(!notifications);
+    const { likedPosts } = useLikedPosts();
   return (
       <>
           <CreatePost isOpen={newPostModal} toggle={newPostModalToggle}/>
-          <Notifications toggle={notifications}/>
+          <Notifications isOpen={notifications} likedPosts={likedPosts}/>
           <SideBarDiv className="d-none d-md-block">
               <div>
                   <div className='d-flex ps-2 my-3'>
                       <img className="d-none d-xl-block" src={Logo} alt="Instagram" width={105} height={60}/>
                   </div>
                   <div className="d-block d-xl-none mb-4">
-                      <SidebarMenu img={InstagramIcon}/>
+                      <Menu img={InstagramIcon}/>
                   </div>
-                  <SidebarMenu title={t('home')} img={Home}/>
-                  <SidebarMenu title={t('search')} img={Search}/>
-                  <SidebarMenu title={t('explore')} img={Explore}/>
-                  <SidebarMenu title={t('reels')} img={Reels}/>
-                  <SidebarMenu title={t('messages')} img={Chat}/>
-                  <SidebarMenu toggle={notificationsToggle} title={t('notifications')} img={Heart}/>
-                  <SidebarMenu toggle={newPostModalToggle} title={t('create')} img={Create}/>
-                  <SidebarMenu title={t('profile')} img={User}/>
+                  <Menu title={t('home')} img={Home}/>
+                  <Menu title={t('search')} img={Search}/>
+                  <Menu title={t('explore')} img={Explore}/>
+                  <Menu title={t('reels')} img={Reels}/>
+                  <Menu title={t('messages')} img={Chat}/>
+                  <Menu toggle={notificationsToggle} title={t('notifications')} img={Heart}/>
+                  <Menu toggle={newPostModalToggle} title={t('create')} img={Create}/>
+                  <Menu title={t('profile')} img={User}/>
               </div>
               <Col className="d-flex flex-column mt-5 pt-3">
                   <LanguageSelector />

@@ -1,0 +1,73 @@
+.Notificatons {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border: 1px solid transparent;
+    background-color: #fff;
+    z-index: 110;
+    height: 100%;
+    padding: 10px 0;
+    box-shadow: 1px 0 10px #808080;
+    overflow-y: scroll;
+}
+.Notificatons span{
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #e4e6eb;
+    padding-bottom: 10px;
+}
+.List{
+    list-style-type: none;
+    position: relative;
+    padding: 10px 20px 0 20px;
+}
+.Item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+.Item img{
+    object-fit: cover;
+}
+.Item img:nth-child(1){
+    border-radius: 50%;
+}
+.Item p{
+    display: flex;
+    width: 100%;
+    padding: 0 10px;
+}
+.Item p{
+    font-size: 14px;
+    font-weight: 400;
+}
+.Item p span{
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 5px;
+    border: none;
+    padding: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .Notificatons{
+        left: 70px;
+        width: 400px;
+        padding: 10px 10px 0 30px;
+    }
+    .Notificatons span{
+        font-size: 24px;
+        text-align: start;
+        font-weight: 700;
+        border-bottom: none;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .Notificatons{
+        left: 170px!important;
+    }
+}
+
+

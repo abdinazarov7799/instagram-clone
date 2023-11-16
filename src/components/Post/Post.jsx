@@ -58,7 +58,6 @@ const Comments = styled.div `
 
 const Post = (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [liked, setLiked] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const { t } = useTranslation()
     const PostImg = styled.div `
@@ -69,6 +68,7 @@ const Post = (props) => {
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 5px;
+      border: 1px solid #e4e6eb;
 `
 
   return(
@@ -116,8 +116,8 @@ const Post = (props) => {
               <PostImg />
               <PostButtons>
                   <div>
-                      <button onClick={() => setLiked(!liked)}>
-                          {liked ? <img src={Liked} alt="liked"/> : <img src={heart} alt="like"/>}
+                      <button onClick={props.handleLiked}>
+                          {props.liked ? <img src={Liked} alt="liked"/> : <img src={heart} alt="like"/>}
                       </button>
                       <button className="px-3">
                           <img src={comment} alt="comment"/>

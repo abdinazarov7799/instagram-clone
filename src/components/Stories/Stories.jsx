@@ -5,7 +5,7 @@ import user from '../../assets/icons/user.jpg';
 
 const StoriesContainer = styled.div `
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between
 `
 const Stories = () => {
   return (

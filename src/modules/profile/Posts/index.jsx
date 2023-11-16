@@ -1,25 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import Stories from "../../../components/Stories/Stories.jsx";
-import PostList from "./components/Post/index.jsx";
+import PostList from "./components/PostList/index.jsx";
 import {useQuery} from "react-query";
 import {get} from "lodash";
-import {usePostsStore} from "../../../store/usePosts";
+import MobileHeader from "../../../layout/profile/MobileHeader/index.jsx";
+import MobileFooter from "../../../layout/profile/MobileFooter/index.jsx";
+
 function Posts(props) {
     const [skip, setSkip] = useState(0);
-    const posts = usePostsStore(state => get(state, 'posts', []));
-    const addPost = usePostsStore(state => get(state, 'addPost', () => {}));
-    const { isLoading, data } = useQuery('repoData', () =>
-        fetch(`https://dummyjson.com/products?skip=${skip}&limit=10`).then(res =>
+    const [posts,setPosts] = useState([]);
+    const { isLoading, data } = useQuery(['repoData', skip],() =>
+        fetch(`https://dummyjson.com/products?skip=${skip}&limit=5`).then(res =>
             res.json()
         )
     )
     useEffect(() => {
-        isLoading && addPost(data.products);
+        const newPosts = get(data, 'products', []);
+        const updatedPosts = newPosts.map((newPost) => ({ ...newPost, liked: false }));
+        if (updatedPosts.length > 0) {
+            setPosts([...posts, ...updatedPosts]);
+        }
     },[data]);
+
+    const handleSkip = () => {
+        setSkip(skip + 5);
+    }
     return (
         <>
-            <Stories />
-            <PostList isLoading={isLoading} posts={posts} setSkip={setSkip}/>
+            <div className="d-block d-md-none">
+                <MobileHeader />
+            </div>
+            <div className="mt-5 mt-md-0">
+                <Stories />
+            </div>
+            <PostList posts={posts} setPosts={setPosts} isLoading={isLoading}/>
+            <div className="d-block d-md-none">
+                <MobileFooter />
+            </div>
+            {!isLoading && <button className="my-4 w-50 btn btn-outline-light text-black" onClick={handleSkip}>Load More</button>}
         </>
     );
 }

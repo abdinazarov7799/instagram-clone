@@ -2,10 +2,9 @@ import {Dropdown, Space, Switch} from "antd";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
 import {useTranslation} from "react-i18next";
-import Menu from "../../assets/icons/menu.png";
-import SidebarMenu from "../SidebarMenu/SidebarMenu.jsx";
-import {useAuthStore} from "../../store/useAuth.jsx";
+import MenuImg from "../../assets/icons/menu.png";
 import {useNavigate} from "react-router";
+import Menu from "../Menu/Menu.jsx";
 
 
 const HomeMenu = () => {
@@ -54,7 +53,7 @@ const HomeMenu = () => {
                   placement="topLeft"
               >
                   <span>
-                      <SidebarMenu title={t('more')} img={Menu}/>
+                      <Menu title={t('more')} img={MenuImg}/>
                   </span>
               </Dropdown>
           </Space>
