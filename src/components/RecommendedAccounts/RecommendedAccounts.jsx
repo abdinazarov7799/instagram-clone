@@ -1,6 +1,5 @@
 import {Col, Row} from "reactstrap";
 
-
 const RecommendedAccounts = (props) => {
   return (
       <>
@@ -11,7 +10,8 @@ const RecommendedAccounts = (props) => {
                          height={52}
                          style={{
                              border: '3px solid #be3449',
-                             borderRadius: '50%'
+                             borderRadius: '50%',
+                             objectFit: "cover"
                     }}
                     />
                 </Col>

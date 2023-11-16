@@ -11,6 +11,8 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import AddComment from "../AddComment/index.jsx";
 import Liked from "../../assets/icons/liked.png";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
+import {get} from "lodash";
 
 const PostCard = styled.div `
   width: 100%;
@@ -136,7 +138,7 @@ const Post = (props) => {
                       <p style={{fontWeight: 500, marginRight: '5px'}}>{props.userNickName}</p>
                       <p>{props.title}</p>
                   </div>
-                  <span className="text-muted d-flex">
+                  <span className="d-flex" style={{color: '#808080'}}>
                       <p>{t("viewAll")}</p>
                       <p className="px-1">{props.commentsCount}</p>
                       <p>{t("comments")}</p>

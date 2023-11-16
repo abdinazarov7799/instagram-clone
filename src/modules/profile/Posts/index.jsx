@@ -33,7 +33,11 @@ function Posts(props) {
             <div className="mt-5 mt-md-0">
                 <Stories />
             </div>
-            <PostList posts={posts} setPosts={setPosts} isLoading={isLoading}/>
+            <PostList
+                posts={posts}
+                setPosts={setPosts}
+                isLoading={isLoading}
+            />
             <div className="d-block d-md-none">
                 <MobileFooter />
             </div>

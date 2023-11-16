@@ -6,36 +6,41 @@ import {useTranslation} from "react-i18next";
 import Menu from "../../../components/Menu/Menu.jsx";
 import Notifications from "../../../components/Notifications/index.jsx";
 import useLikedPosts from "../../../store/useLikedPosts.jsx";
+import {useSettingsStore} from "../../../store/settingsStore.jsx";
+import {get} from "lodash";
 
-const Header = styled.div`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 0 16px;
-  width: 100%;
-  z-index: 100;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #e4e6eb;
-   input{
-     width: 270px;
-     outline: none;
-     padding: 5px 15px;
-     border: 1px solid transparent;
-     background-color: #EFEFEF;
-     border-radius: 10px;
-     margin-right: 5px;
-     font-weight: 300;
-   }
-`
 const MobileHeader = () => {
     const [notifications, setNotifications] = useState(false);
     const notificationsToggle = () => setNotifications(!notifications);
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const { likedPosts } = useLikedPosts();
     const { t } = useTranslation();
 
+    const Header = styled.div`
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 0 16px;
+      width: 100%;
+      z-index: 100;
+      justify-content: space-between;
+      align-items: center;
+      background-color: ${theme === 'dark' ? '#000' : '#fff'};
+      color: ${theme !== 'dark' ? '#000' : '#fff'};
+      border-bottom: 1px solid ${theme === 'dark' ? '#808080' : '#e4e6eb'};
+       input{
+         width: 270px;
+         outline: none;
+         padding: 5px 15px;
+         border: 1px solid transparent;
+         background-color: ${theme === 'dark' ? '#262626' : '#EFEFEF'};
+         color: ${theme !== 'dark' ? '#000' : '#fff'};
+         border-radius: 10px;
+         margin-right: 5px;
+         font-weight: 300;
+       }
+`
   return (
       <>
           <Notifications isOpen={notifications}

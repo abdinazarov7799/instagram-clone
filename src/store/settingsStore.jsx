@@ -8,6 +8,8 @@ let settingsStore = (set) => ({
     setTheme: (theme) => set(state => ({...state, theme})),
     isLogin: false,
     setIsLogin: (isLogin) => set(state => ({...state, isLogin})),
+    userData: {},
+    setUserData: (userData) => set(state => ({...state, userData}))
 })
 
 settingsStore = devtools(settingsStore)

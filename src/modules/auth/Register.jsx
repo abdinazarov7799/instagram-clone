@@ -67,6 +67,7 @@ const Register = () => {
     const users = useAuthStore(state => get(state, 'users', []));
     const addUser = useAuthStore(state => get(state, 'addUser', () => {}));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
+    const setUserData = useSettingsStore(state => get(state, 'setUserData', () => {}));
     const [formData, setFormData] = useState(initialFormData);
 
     const onChange = (e) => {
@@ -85,6 +86,7 @@ const Register = () => {
             customMessage('error', t("registered"));
         } else {
             addUser(formData);
+            setUserData(formData);
             customMessage('success', "Login successful");
             setIsLogin(true);
             navigate("/");

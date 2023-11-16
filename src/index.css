@@ -9,6 +9,15 @@ body {
   font-weight: 400;
   overflow-x: hidden;
 }
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #808080;
+}
+body::-webkit-scrollbar-track {
+  background-color: #e4e6eb;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

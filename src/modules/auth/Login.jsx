@@ -68,6 +68,7 @@ const Login = () => {
     const navigate = useNavigate();
     const users = useAuthStore(state => get(state, 'users', []));
     const setIsLogin = useSettingsStore(state => get(state, 'setIsLogin', () => {}));
+    const setUserData = useSettingsStore(state => get(state, 'setUserData', () => {}));
     const [formData, setFormData] = useState(initialFormData);
 
     const onChange = (e) => {
@@ -80,9 +81,10 @@ const Login = () => {
             isEqual(get(user, "phoneNumber"), get(formData, "phoneNumber")) &&
             isEqual(get(user, "password"), get(formData, "password"))
         );
-
+        console.log(foundUser)
         if (foundUser) {
             setIsLogin(true);
+            setUserData(foundUser)
             navigate("/");
             customMessage('success', "Login successful")
         } else {

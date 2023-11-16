@@ -1,10 +1,13 @@
 import RecommendedAccounts from "../../../components/RecommendedAccounts/RecommendedAccounts.jsx";
-import Img from '../../../assets/images/photo_2023-08-01_11-36-40.jpg'
+import Img from '../../../assets/icons/user.jpg'
 import UserImg from '../../../assets/icons/user.jpg'
 import {useTranslation} from "react-i18next";
 import styled from "styled-components";
 import Footer from "../Footer/Footer.jsx";
 import {Col, Row} from "reactstrap";
+import {useAuthStore} from "../../../store/useAuth.jsx";
+import {get} from "lodash";
+import {useSettingsStore} from "../../../store/settingsStore.jsx";
 
 const RightSidebarDiv = styled.div `
     display: flex;
@@ -13,9 +16,10 @@ const RightSidebarDiv = styled.div `
 `
 const RightSidebar = () => {
     const { t } = useTranslation();
+    const userData = useSettingsStore(state => get(state, 'userData', {}));
   return(
       <RightSidebarDiv className="d-none d-md-block">
-        <RecommendedAccounts img={Img} nick={'diyorbek_abdinazarov'} description={'Diyorbek'} info={t('switch')}/>
+        <RecommendedAccounts img={Img} nick={userData.fullName} description={userData.userName} info={t('switch')}/>
         <Row className='d-flex justify-content-between my-3'>
             <Col md={9}>
                 <p style={{fontSize: '14px', color: '#737373', fontWeight: 500}}>{t('suggestedForYou')}</p>

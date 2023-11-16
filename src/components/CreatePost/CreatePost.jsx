@@ -2,29 +2,30 @@ import CustomModal from "../CustomModal/CustomModal.jsx";
 import {useTranslation} from "react-i18next";
 import uploadImg from "../../assets/icons/upload-img.png";
 import {Col, Row} from "reactstrap";
-import {Button, Upload} from "antd";
-import {customMessage} from "../Message/Message.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
+import {get} from "lodash";
+import {useState} from "react";
 
 
 const NewPost = (props) => {
     const { t } = useTranslation();
-    const uploadingImg = {
-        name: 'file',
-        action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                customMessage('success',`${info.file.name} file uploaded successfully`)
-            } else if (info.file.status === 'error') {
-                customMessage('success', `${info.file.name} file upload failed.`)
-            }
-        },
-    };
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
+    const [selectedFile, setSelectedFile] = useState();
+    const [imgSRC, setImgSRC] = useState();
+    const handleChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file instanceof Blob) {
+            setSelectedFile(file);
+        } else {
+            console.error('Error type file');
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const imgSrc = reader.result;
+            setImgSRC(imgSrc);
+        };
+        reader.readAsDataURL(selectedFile);
+    }
   return(
       <>
           <CustomModal
@@ -39,9 +40,15 @@ const NewPost = (props) => {
                   <Col>
                       <p>{t("newPostText")}</p>
                   </Col>
-                  <Upload {...uploadingImg} className='d-flex align-items-center flex-column'>
-                      <Button type="primary" className='mt-3 mb-5'>{t("selectFromComputer")}</Button>
-                  </Upload>
+                  <img src={imgSRC} width={300} height={200} className="mt-3 object-fit-cover"/>
+                  <Col className="mt-4">
+                      <input className={theme === 'dark' ? 'btn btn-dark' : 'btn btn-light'}
+                             type="file"
+                             accept=".image/jpeg, .png, .svg, .jpg"
+                             placeholder={t("selectFromComputer")}
+                             onChange={handleChange}
+                      />
+                  </Col>
               </div>
           }
           />

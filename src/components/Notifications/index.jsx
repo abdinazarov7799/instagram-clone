@@ -3,13 +3,21 @@ import styled from "styled-components";
 import classes from "./style.module.css";
 import leftArrow from '../../assets/icons/left-arrow.png'
 import Menu from "../Menu/Menu.jsx";
+import {useSettingsStore} from "../../store/settingsStore.jsx";
+import {get} from "lodash";
 
 const Notifications = (props) => {
     const { t } = useTranslation();
-    const { isOpen, likedPosts, toggle} = props
+    const { isOpen, likedPosts, toggle} = props;
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const NotificatonsDiv = styled.div `
       transform: translate(${isOpen ? '0%' : '-200%'});
       transition: transform 0.5s ease-in-out;
+      background-color: ${theme === 'dark' ? '#000' : '#fff'};
+      color: ${theme !== 'dark' ? '#000' : '#fff'};
+        span{
+          border-bottom: 1px solid ${theme === 'dark' ? '#808080' : '#e4e6eb'}
+        }
     `
   return(
       <NotificatonsDiv className={`${classes.Notificatons} ${isOpen ? 'd-block' : 'd-none'}`}>

@@ -8,34 +8,36 @@ import {useEffect, useState} from "react";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
 import {Dropdown, Space} from "antd";
-const LanguageBtn = styled.button `
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 2px 0;
-    padding: 12px;
-    border: none;
-    background: transparent;
-    border-radius: 10px;
-    cursor: pointer;
-      &:hover{
-        background-color: #e4e6eb;
-        & img{
-          transition: 400ms;
-          transform: scale(1.1);
-        }
-      }
-  
-`
 
 const LanguageSelector = () => {
     const [showLang, setShowLang] = useState(false);
     const lang = useSettingsStore(state => get(state, 'lang', () => {}));
     const setLang = useSettingsStore(state => get(state, 'setLang', () => {}));
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const { t } = useTranslation();
     const currentLang = []
     const items = []
 
+    const LanguageBtn = styled.button `
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 2px 0;
+        padding: 12px;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        cursor: pointer;
+        color: ${theme !== 'dark' ? '#000' : '#fff'};
+          &:hover{
+            background-color: #e4e6eb;
+            color: #000;
+            & img{
+              transition: 400ms;
+              transform: scale(1.1);
+            }
+          }
+`
     const changeLanguage = (lng) => {
         return () => {
             setShowLang(!showLang);

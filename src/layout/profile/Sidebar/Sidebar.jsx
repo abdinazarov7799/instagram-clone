@@ -3,12 +3,11 @@ import Search from '/src/assets/icons/search.png'
 import Chat from '/src/assets/icons/chat.png'
 import Create from '/src/assets/icons/tab.png'
 import Heart from '/src/assets/icons/heart.png'
-import HeartFilled from '/src/assets/icons/heart-filled.png'
 import Explore from '/src/assets/icons/explore.png'
 import User from '/src/assets/icons/user.png'
 import Reels from '/src/assets/icons/video.png'
 import Logo from '/src/assets/icons/Logo-Instagram.png'
-import InstagramIcon from '/src/assets/icons/instagram-icon.png'
+import InstagramIcon from '/src/assets/icons/instagram.png'
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {Col} from "reactstrap";
@@ -19,22 +18,25 @@ import HomeMenu from "../../../components/HomeMenu/HomeMenu.jsx";
 import Notifications from "../../../components/Notifications/index.jsx";
 import Menu from "../../../components/Menu/Menu.jsx";
 import useLikedPosts from "../../../store/useLikedPosts.jsx";
+import {useSettingsStore} from "../../../store/settingsStore.jsx";
+import {get} from "lodash";
 
-const SideBarDiv = styled.div `
-  position: fixed;
-  z-index: 120;
-  padding: 8px 12px;
-  border-right: 1px solid rgba(128, 128, 128, 0.34);
-  height: 100vh;
-  background-color: #fff;
-`
 const SideBar = () => {
     const { t } = useTranslation();
     const [newPostModal, setNewPostModal] = useState(false);
     const newPostModalToggle = () => setNewPostModal(!newPostModal);
     const [notifications, setNotifications] = useState(false);
     const notificationsToggle = () => setNotifications(!notifications);
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const { likedPosts } = useLikedPosts();
+    const SideBarDiv = styled.div `
+      position: fixed;
+      z-index: 120;
+      padding: 8px 12px;
+      border-right: 1px solid rgba(128, 128, 128, 0.34);
+      height: 100vh;
+      background-color: ${theme === 'dark' ? '#000' : '#fff'};
+`
   return (
       <>
           <CreatePost isOpen={newPostModal} toggle={newPostModalToggle}/>
