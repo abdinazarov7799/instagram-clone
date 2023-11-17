@@ -57,5 +57,7 @@
   "viewAll": "View all",
   "comments": "comments",
   "addAComment": "Add a comment...",
-  "registered": "This number is already registered!"
+  "registered": "This number is already registered!",
+  "title": "Title:",
+  "createPost": "Create new post"
 }

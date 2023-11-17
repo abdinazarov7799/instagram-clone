@@ -30,14 +30,14 @@ const MobileHeader = () => {
       color: ${theme !== 'dark' ? '#000' : '#fff'};
       border-bottom: 1px solid ${theme === 'dark' ? '#808080' : '#e4e6eb'};
        input{
-         width: 270px;
+         width: 80%;
          outline: none;
          padding: 5px 15px;
          border: 1px solid transparent;
          background-color: ${theme === 'dark' ? '#262626' : '#EFEFEF'};
          color: ${theme !== 'dark' ? '#000' : '#fff'};
          border-radius: 10px;
-         margin-right: 5px;
+         margin: 0 5px;
          font-weight: 300;
        }
 `
@@ -52,12 +52,8 @@ const MobileHeader = () => {
                   <img src={Logo} alt="Logo" width={105} height={60} />
               </div>
               <div className="d-flex align-items-center">
-                  <div>
-                      <input type="text" placeholder={t("search")}/>
-                  </div>
-                  <div>
-                      <Menu toggle={notificationsToggle} img={Heart}/>
-                  </div>
+                  <input type="text" placeholder={t("search")}/>
+                  <Menu toggle={notificationsToggle} img={Heart}/>
               </div>
           </Header>
       </>

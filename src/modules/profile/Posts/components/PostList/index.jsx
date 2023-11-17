@@ -27,6 +27,7 @@ const PostList = (props) => {
                          posts.map((post) => (
                              <>
                                  <Post
+                                     key={post?.id}
                                      userImg={post?.thumbnail}
                                      userNickName={post?.brand}
                                      date={Date()}

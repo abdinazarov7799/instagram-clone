@@ -5,10 +5,12 @@ import {useQuery} from "react-query";
 import {get} from "lodash";
 import MobileHeader from "../../../layout/profile/MobileHeader/index.jsx";
 import MobileFooter from "../../../layout/profile/MobileFooter/index.jsx";
+import useNewPost from "../../../store/useNewPost.jsx";
 
 function Posts(props) {
     const [skip, setSkip] = useState(0);
     const [posts,setPosts] = useState([]);
+    const { NewPost } = useNewPost();
     const { isLoading, data } = useQuery(['repoData', skip],() =>
         fetch(`https://dummyjson.com/products?skip=${skip}&limit=5`).then(res =>
             res.json()
@@ -21,7 +23,11 @@ function Posts(props) {
             setPosts([...posts, ...updatedPosts]);
         }
     },[data]);
-
+    useEffect(() => {
+        if (NewPost !== []){
+            setPosts([...NewPost, ...posts ]);
+        }
+    },[NewPost])
     const handleSkip = () => {
         setSkip(skip + 5);
     }
