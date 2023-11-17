@@ -59,6 +59,14 @@ const Description = styled.div`
     color: #00376B;
   }
 `
+const Div = styled.div `
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 const initialFormData = {
     phoneNumber: '',
     password: ''
@@ -81,7 +89,6 @@ const Login = () => {
             isEqual(get(user, "phoneNumber"), get(formData, "phoneNumber")) &&
             isEqual(get(user, "password"), get(formData, "password"))
         );
-        console.log(foundUser)
         if (foundUser) {
             setIsLogin(true);
             setUserData(foundUser)
@@ -92,7 +99,7 @@ const Login = () => {
         }
     }
     return (
-        <>
+        <Div>
             <LoginForm>
                 <div className='mt-2'>
                     <img src={Logo} width={190} height={110} alt={"instagram image"}/>
@@ -132,7 +139,7 @@ const Login = () => {
                     </p>
                 </div>
             </LoginForm>
-        </>
+        </Div>
     )
 }
 export default Login;

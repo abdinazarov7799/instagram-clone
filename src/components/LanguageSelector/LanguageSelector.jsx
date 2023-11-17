@@ -1,29 +1,24 @@
-import {useTranslation} from "react-i18next";
 import styled from "styled-components";
 import uz from "../../assets/icons/uz.png"
 import ru from "../../assets/icons/ru.png"
 import eng from "../../assets/icons/eng.png"
 import i18n from "i18next";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
-import {Dropdown, Space} from "antd";
+import {Dropdown} from "antd";
 
 const LanguageSelector = () => {
     const [showLang, setShowLang] = useState(false);
     const lang = useSettingsStore(state => get(state, 'lang', () => {}));
     const setLang = useSettingsStore(state => get(state, 'setLang', () => {}));
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
-    const { t } = useTranslation();
     const currentLang = []
     const items = []
 
     const LanguageBtn = styled.button `
-        width: 100%;
-        display: flex;
-        align-items: center;
         margin: 2px 0;
-        padding: 12px;
+        padding: 12px 8px;
         border: none;
         background: transparent;
         border-radius: 10px;
@@ -83,18 +78,24 @@ const LanguageSelector = () => {
 
   return(
       <>
-          <Space>
+          <div>
               <Dropdown
                   menu={{
                       items,
                   }}
                   placement="topLeft"
               >
-                  <LanguageBtn >
-                      {currentLang}
+                  <LanguageBtn>
+                      {
+                          currentLang === [] ?
+                          <span onClick={changeLanguage('eng')} className="d-flex align-items-center">
+                              <img src={eng} width={20} height={20} className='me-2'/>
+                              <span className="d-none d-xl-block">English</span>
+                          </span> : currentLang
+                      }
                   </LanguageBtn>
               </Dropdown>
-          </Space>
+          </div>
       </>
   )
 }

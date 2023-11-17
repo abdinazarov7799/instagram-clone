@@ -9,6 +9,14 @@ import { useNavigate } from "react-router";
 import { useSettingsStore } from "../../store/settingsStore.jsx";
 import { Link } from "react-router-dom";
 
+const Div = styled.div `
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 const RegisterForm = styled.div`
   width: 100%;
   margin: 15px auto 0 auto;
@@ -94,7 +102,7 @@ const Register = () => {
     }
 
     return (
-        <>
+        <Div>
             <RegisterForm>
                 <div className='mt-2'>
                     <img src={Logo} width={190} height={110} alt="Instagram Logo" />
@@ -165,7 +173,7 @@ const Register = () => {
                     <p>{t('haveAnAccount')} <Link className="text-decoration-none" to={"/auth/login"}>{t("login")}</Link></p>
                 </div>
             </RegisterForm>
-        </>
+        </Div>
     );
 }
 

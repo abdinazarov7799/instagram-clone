@@ -1,4 +1,4 @@
-.Notificatons {
+.Search {
     position: absolute;
     width: 100%;
     left: 0;
@@ -11,7 +11,7 @@
     box-shadow: 5px 0 10px rgba(128, 128, 128, 0.41);
     overflow-y: scroll;
 }
-.Notificatons span{
+.Search span{
     font-size: 16px;
     text-align: center;
     padding-bottom: 10px;
@@ -51,12 +51,12 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .Notificatons{
+    .Search{
         left: 72px;
         width: 400px;
         padding: 10px 10px 0 30px;
     }
-    .Notificatons span{
+    .Search span{
         font-size: 24px;
         text-align: start;
         font-weight: 700;
@@ -64,7 +64,7 @@
     }
 }
 @media only screen and (min-width: 1200px) {
-    .Notificatons{
+    .Search{
         left: 176px!important;
     }
 }

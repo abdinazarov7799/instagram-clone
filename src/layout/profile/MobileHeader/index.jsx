@@ -8,6 +8,7 @@ import Notifications from "../../../components/Notifications/index.jsx";
 import useLikedPosts from "../../../store/useLikedPosts.jsx";
 import {useSettingsStore} from "../../../store/settingsStore.jsx";
 import {get} from "lodash";
+import {searchPost} from "../../../components/Search/searchPost.jsx";
 
 const MobileHeader = () => {
     const [notifications, setNotifications] = useState(false);
@@ -52,7 +53,7 @@ const MobileHeader = () => {
                   <img src={Logo} alt="Logo" width={105} height={60} />
               </div>
               <div className="d-flex align-items-center">
-                  <input type="text" placeholder={t("search")}/>
+                  <input type="text" onChange={searchPost} placeholder={t("search")}/>
                   <Menu toggle={notificationsToggle} img={Heart}/>
               </div>
           </Header>
