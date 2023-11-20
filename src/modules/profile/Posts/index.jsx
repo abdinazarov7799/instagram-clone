@@ -7,8 +7,10 @@ import MobileHeader from "../../../layout/profile/MobileHeader/index.jsx";
 import MobileFooter from "../../../layout/profile/MobileFooter/index.jsx";
 import useNewPost from "../../../store/useNewPost.jsx";
 import useGlobalPosts from "../../../store/useGlobalPosts.jsx";
+import {useSettingsStore} from "../../../store/settingsStore.jsx";
 
 function Posts(props) {
+    const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const [skip, setSkip] = useState(0);
     const [posts,setPosts] = useState([]);
     const { NewPost } = useNewPost();
@@ -54,7 +56,12 @@ function Posts(props) {
             <div className="d-block d-md-none">
                 <MobileFooter />
             </div>
-            {!isLoading && <button className="my-4 w-50 btn btn-outline-light text-black" onClick={handleSkip}>Load More</button>}
+            {!isLoading && (
+                theme === 'dark' ?
+                    <button className="my-4 w-50 btn btn-outline-dark text-white" onClick={handleSkip}>Load More</button>
+                    :
+                    <button className="my-4 w-50 btn btn-outline-light text-black" onClick={handleSkip}>Load More</button>
+            )}
         </>
     );
 }
