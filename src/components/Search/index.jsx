@@ -5,13 +5,13 @@ import leftArrow from '../../assets/icons/left-arrow.png'
 import Menu from "../Menu/Menu.jsx";
 import {useSettingsStore} from "../../store/settingsStore.jsx";
 import {get} from "lodash";
-import {searchPost} from "./searchPost";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 const Search = (props) => {
     const { t } = useTranslation();
-    const { isOpen, toggle} = props;
-    const [resultSearch, setResultSearch] = useState()
+    const { isOpen, toggle, globalPosts} = props;
+    const [resultSearch, setResultSearch] = useState([]);
+    const [value, setValue] = useState();
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const SearchDiv = styled.div `
       transform: translate(${isOpen ? '0%' : '-200%'});
@@ -33,6 +33,22 @@ const Search = (props) => {
       margin: 8px 0;
       font-weight: 300;
     `
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    });
+
+    const searchPost = (e) => {
+        const inputText = e.target.value
+        setValue(inputText)
+        setResultSearch([]);
+        const searchResults = globalPosts.filter((product) =>
+            product.description.toLowerCase().includes(inputText.toLowerCase())
+        );
+        setResultSearch(searchResults)
+    }
   return(
       <SearchDiv className={`${classes.Search} ${isOpen ? 'd-block' : 'd-none'}`}>
           <span className="d-flex align-items-center">
@@ -41,10 +57,15 @@ const Search = (props) => {
               </div>
               {t("search")}
           </span>
-          <Input type="text" onChange={searchPost} placeholder={t("search")}/>
+          <Input type="text"
+                 onChange={searchPost}
+                 placeholder={t("search")}
+                 value={value}
+                 ref={inputRef}
+          />
           <ul className={classes.List}>
               {
-                  resultSearch && (
+                  value !== '' ? (
                       resultSearch.map((post) => (
                           <li className={classes.Item} key={post.id}>
                               <img src={post.thumbnail} alt="img" width={44} height={44}/>
@@ -55,7 +76,7 @@ const Search = (props) => {
                               <img src={post.thumbnail} alt="img" width={44} height={44}/>
                           </li>
                       ))
-                  )
+                  ) : null
               }
           </ul>
       </SearchDiv>

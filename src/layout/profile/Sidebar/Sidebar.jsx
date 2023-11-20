@@ -19,6 +19,7 @@ import useLikedPosts from "../../../store/useLikedPosts.jsx";
 import {useSettingsStore} from "../../../store/settingsStore.jsx";
 import {get} from "lodash";
 import Search from "../../../components/Search/index.jsx";
+import useGlobalPosts from "../../../store/useGlobalPosts.jsx";
 
 const SideBar = () => {
     const { t } = useTranslation();
@@ -30,6 +31,7 @@ const SideBar = () => {
     const serchToggle = () => setSearch(!serch);
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
     const { likedPosts } = useLikedPosts();
+    const { globalPosts } = useGlobalPosts()
     const SideBarDiv = styled.div `
       position: fixed;
       height: 100vh;
@@ -44,7 +46,7 @@ const SideBar = () => {
           <SideBarDiv className="d-none d-md-block">
               <div>
                   <Notifications isOpen={notifications} likedPosts={likedPosts}/>
-                  <Search isOpen={serch} likedPosts={likedPosts}/>
+                  <Search isOpen={serch} globalPosts={globalPosts}/>
                   <div className='d-flex ps-2 my-3'>
                       <img className="d-none d-xl-block" src={Logo} alt="Instagram" width={105} height={60}/>
                   </div>

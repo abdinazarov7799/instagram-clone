@@ -1,22 +1,50 @@
 import styled from "styled-components";
 import Logo from '../../../assets/icons/Logo-Instagram.png'
 import Heart from "../../../assets/icons/heart.png";
-import {useState} from "react";
+import {useState,useEffect, useRef} from "react";
 import {useTranslation} from "react-i18next";
 import Menu from "../../../components/Menu/Menu.jsx";
 import Notifications from "../../../components/Notifications/index.jsx";
 import useLikedPosts from "../../../store/useLikedPosts.jsx";
 import {useSettingsStore} from "../../../store/settingsStore.jsx";
 import {get} from "lodash";
-import {searchPost} from "../../../components/Search/searchPost.jsx";
+import useGlobalPosts from "../../../store/useGlobalPosts.jsx";
+import classes from "../../../components/Search/style.module.css";
+
+const List = styled.ul `
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  left: 0;
+  background-color: #fff;
+`
+const Item = styled.li `
+  
+`
 
 const MobileHeader = () => {
     const [notifications, setNotifications] = useState(false);
     const notificationsToggle = () => setNotifications(!notifications);
     const theme = useSettingsStore(state => get(state, 'theme', () => {}));
+    const [resultSearch, setResultSearch] = useState([]);
+    const { globalPosts } = useGlobalPosts()
+    const [value, setValue] = useState();
     const { likedPosts } = useLikedPosts();
     const { t } = useTranslation();
+    const inputRef = useRef(null);
 
+    useEffect(() => {
+        inputRef.current.focus();
+    },);
+    const searchPost = (e) => {
+        const inputText = e.target.value
+        setValue(inputText)
+        setResultSearch([]);
+        const searchResults = globalPosts.filter((product) =>
+            product.description.toLowerCase().includes(inputText.toLowerCase())
+        );
+        setResultSearch(searchResults)
+    }
     const Header = styled.div`
       display: flex;
       position: fixed;
@@ -53,9 +81,32 @@ const MobileHeader = () => {
                   <img src={Logo} alt="Logo" width={105} height={60} />
               </div>
               <div className="d-flex align-items-center">
-                  <input type="text" onChange={searchPost} placeholder={t("search")}/>
+                  <input type="text"
+                         placeholder={t("search")}
+                         value={value}
+                         ref={inputRef}
+                         onChange={searchPost}
+                  />
                   <Menu toggle={notificationsToggle} img={Heart}/>
               </div>
+              {
+                  value !== '' ? (
+                      <List className={classes.List}>
+                          {
+                              resultSearch.map((post) => (
+                                  <Item className={classes.Item} key={post.id}>
+                                      <img src={post.thumbnail} alt="img" width={44} height={44}/>
+                                      <p>
+                                          <span>{post.brand}</span>
+                                          {post.description}
+                                      </p>
+                                      <img src={post.thumbnail} alt="img" width={44} height={44}/>
+                                  </Item>
+                              ))
+                          }
+                      </List>
+                  ) : null
+              }
           </Header>
       </>
   )
