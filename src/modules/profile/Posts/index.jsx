@@ -18,20 +18,20 @@ function Posts(props) {
             res.json()
         )
     )
+
     useEffect(() => {
         const newPosts = get(data, 'products', []);
         const updatedPosts = newPosts.map((newPost) => ({ ...newPost, liked: false }));
         if (updatedPosts.length > 0) {
             setPosts([...posts, ...updatedPosts]);
-            setGlobalPosts(newPosts);
+            setGlobalPosts([...posts, ...updatedPosts]);
         }
-        setGlobalPosts(newPosts);
     },[data]);
 
     useEffect(() => {
         if (NewPost !== []){
             setPosts([...NewPost, ...posts ]);
-            setGlobalPosts(posts)
+            setGlobalPosts([...NewPost, ...posts ])
         }
     },[NewPost])
 
